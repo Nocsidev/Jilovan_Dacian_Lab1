@@ -1,4 +1,4 @@
-@page
+@page "{id:int?}"
 @model Jilovan_Dacian_Lab2.Pages.Publishers.IndexModel
 
 @{
@@ -10,28 +10,55 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Publisher[0].PublisherName)
             </th>
-
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Publisher) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.PublisherName)
-            </td>
+        @foreach (var item in Model.PublisherData.Publishers)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.PublisherID)
+            {
+                selectedRow = "table-success";
+            }
 
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(model => item.PublisherName)
+                </td>
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (Model.PublisherData.Books != null)
+{
+    <h3>Books Edited by Selected Publisher</h3>
+    @if (!Model.PublisherData.Books.Any())
+    {
+        <p>No books are assigned to this publisher.</p>
+    }
+    else
+    {
+        <table class="table">
+            @foreach (var book in Model.PublisherData.Books)
+            {
+                <tr>
+                    <td>@book.Title: @(book.Author?.FullName ?? "Unknown author")</td>
+                </tr>
+            }
+        </table>
+    }
+}

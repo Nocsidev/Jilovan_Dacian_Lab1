@@ -32,6 +32,7 @@
                 @Html.DisplayFor(model => item.BookCategories)
             </td>
             <td>
+                <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
@@ -40,3 +41,33 @@
 }
     </tbody>
 </table>
+
+@if (Model.SelectedCategoryID != null)
+{
+    <h3>Books in the Selected Category</h3>
+
+    @if (Model.SelectedBooks.Count == 0)
+    {
+        <p>No Books found in Selected Category</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titlu</th>
+                    <th>Autor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.SelectedBooks)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@(book.Author?.FullName ?? "Unknown Author")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

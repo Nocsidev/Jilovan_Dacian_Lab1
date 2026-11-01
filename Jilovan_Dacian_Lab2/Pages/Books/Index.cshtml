@@ -22,10 +22,14 @@
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TitleSort">
                 @Html.DisplayNameFor(model => model.Book[0].Title)
+                </a>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Book[0].Author.LastName)
+             <th colspan ="2">
+                 <a asp - page ="./Index" asp - route - sortOrder =" @Model.AuthorSort ">
+                    @Html.DisplayNameFor(model => model.Book[0].Author)
+                 </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Price)
