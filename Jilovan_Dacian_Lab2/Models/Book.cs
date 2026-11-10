@@ -7,6 +7,8 @@ namespace Jilovan_Dacian_Lab2.Models
     {
         public int ID { get; set; }
 
+        [Required]
+        [StringLength(150, MinimumLength = 3)]
         [Display(Name = "Book Title")]
         public string Title { get; set; }
 
@@ -14,6 +16,7 @@ namespace Jilovan_Dacian_Lab2.Models
         public Author? Author { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
+        [Range(0.01, 500)]
         public decimal Price { get; set; }
 
         [DataType(DataType.Date)]

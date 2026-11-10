@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Jilovan_Dacian_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Jilovan_Dacian_Lab2.Pages.BookPages;
 
+[Authorize(Roles = "Admin")]
 public class CreateModel : BookCategoriesPageModel
 {
     private readonly Jilovan_Dacian_Lab2Context _context;

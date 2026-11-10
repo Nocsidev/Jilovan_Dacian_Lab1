@@ -1,11 +1,13 @@
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Jilovan_Dacian_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Jilovan_Dacian_Lab2.Models;
 
 namespace Jilovan_Dacian_Lab2.Pages.BookPages;
 
+[Authorize(Roles = "Admin")]
 public class EditModel : BookCategoriesPageModel
 {
     private readonly Jilovan_Dacian_Lab2Context _context;
